@@ -8,7 +8,16 @@ import { Ingredients } from "../../data/ingredients.model";
     styleUrls: ["./shopping-list.component.css"]
 })
 export class ShoppingList implements OnInit {
-    ingredients: Ingredients[];
+    ingredients: Ingredients[] = [
+        {
+            name: "Apples",
+            amount: 5
+        },
+        {
+            name: "Tomaatoes",
+            amount: 11
+        }
+    ]
 
     constructor(){}
 
