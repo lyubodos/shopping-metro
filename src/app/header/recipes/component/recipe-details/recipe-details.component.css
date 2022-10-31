@@ -2,3 +2,7 @@ img {
     height: 300px;
     width: 400px;
 }
+
+li {
+    cursor: pointer;
+}
