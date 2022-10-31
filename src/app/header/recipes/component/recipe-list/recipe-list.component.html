@@ -4,9 +4,7 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-xs-12">
-    <a href="#" class="list-group-item clearfix" *ngFor="let recipe of recipes" (click)="onSelectedRecipe(recipe)">
-      <app-recipe-item [recipe]="recipe" ></app-recipe-item>
-    </a>
+  <div class="col-xs-12">    
+      <app-recipe-item *ngFor="let recipe of recipes" [recipe]="recipe"></app-recipe-item>
   </div>
 </div>
