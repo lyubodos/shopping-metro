@@ -4,12 +4,12 @@ import { Ingredients } from "../data/ingredients.model";
 export class ShoppingListService {
    private ingredients: Ingredients[] = [
         {
-            name: "Apples",
-            amount: 5
+            name: "Cucumbers",
+            amount: 10
         },
         {
-            name: "Tomatoes",
-            amount: 11
+            name: "Eggs",
+            amount: 2
         }
     ];
     
