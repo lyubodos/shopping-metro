@@ -1,4 +1,6 @@
-import { Component, OnInit, EventEmitter, Output } from "@angular/core";
+import { Component, OnInit, Output } from "@angular/core";
+import { DataStorageService } from "src/app/shared/data-storage.service";
+import { RecipeService } from "../recipes/services/recipe.service";
 
 @Component({
     selector: "app-header",
@@ -7,4 +9,9 @@ import { Component, OnInit, EventEmitter, Output } from "@angular/core";
 })
 export class Header {
 
+    constructor(private dataStorageService: DataStorageService) {}
+
+    public saveRecipes(): void {
+        this.dataStorageService.storeRecipes();
+    }
 }
