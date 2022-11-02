@@ -18,7 +18,7 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class ShoppingListEditComponent implements OnInit, OnDestroy {
   @ViewChild('f') formEdit: NgForm;
-  
+
   private unsubscribe$ = new Subject<void>();
 
   public editMode: boolean;
@@ -45,10 +45,21 @@ export class ShoppingListEditComponent implements OnInit, OnDestroy {
   }
 
   public onSubmit(form: NgForm) {
-    const name = form.value.name;
-    const amount = form.value.amount;
-    const ingredientToBePushed = { name, amount };
-    this.shoppingListServie.addIngredient(ingredientToBePushed);
+
+    if(this.editMode){
+      let updatedName = this.formEdit.value.name;
+      let updatedAmount = this.formEdit.value.amount;
+      let updatedItem = {name: updatedName, amount: updatedAmount};
+
+      this.shoppingListServie.updateIngredient(updatedItem, this.indexOfEditedItem)
+
+    } else {
+      const name = form.value.name;
+      const amount = form.value.amount;
+      const ingredientToBePushed = { name, amount };
+      this.shoppingListServie.addIngredient(ingredientToBePushed);
+    }
+  
     form.reset();
   }
 
