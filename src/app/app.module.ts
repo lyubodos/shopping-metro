@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { ShoppingList } from './header/shopping-list/component/shopping-list/shopping-list.component';
@@ -34,6 +34,7 @@ import { RecipeEditComponent } from './header/recipes/component/recipe-edit/reci
   imports: [
     BrowserModule,
     FormsModule,
+    HttpClientModule,
     AppRoutingModule
   ],
   providers: [ShoppingListService],
