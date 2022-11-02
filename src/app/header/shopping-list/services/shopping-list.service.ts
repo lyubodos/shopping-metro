@@ -15,6 +15,7 @@ export class ShoppingListService {
     ];
     
     public ingredientsChanged = new Subject<Ingredients[]>();
+    public ingredientEdited = new Subject<number>();
 
     public getIngredients(): Ingredients[] {
         return this.ingredients.slice();

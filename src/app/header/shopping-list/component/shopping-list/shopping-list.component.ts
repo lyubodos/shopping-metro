@@ -12,7 +12,6 @@ import { takeUntil } from "rxjs/operators";
     providers: [ShoppingListService]
 })
 export class ShoppingList implements OnInit, OnDestroy {
-    private ingredientsSub: Subscription;
     private unsubscribe$ =  new Subject<void>();
 
     public ingredients: Ingredients[];
@@ -35,9 +34,7 @@ export class ShoppingList implements OnInit, OnDestroy {
        this.unsubscribe$.complete();
     }
 
-    public loadIngredients(index: number){
-        this.selectedIngrediens = this.shoppingListService.getIngredient(index);
-        console.log(this.selectedIngrediens);
-        
+    public onEditIngredient(index: number){
+        this.shoppingListService.ingredientEdited.next(index);
     }
 }
