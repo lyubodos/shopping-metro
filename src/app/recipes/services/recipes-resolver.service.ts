@@ -5,11 +5,8 @@ import { Recipe } from "../data/recipe.model";
 
 
 @Injectable({providedIn: 'root'})
-export class RecipesResolverService implements Resolve<Recipe[]>{
+export class RecipesResolverService {
 
     constructor(private dataStorageService: DataStorageService) {}
 
-    resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot){
-        return this.dataStorageService.fetchRecipes();
-    }
 }

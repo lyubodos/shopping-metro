@@ -5,8 +5,7 @@ import { ShoppingListService } from './shopping-list/services/shopping-list.serv
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
-  providers: [ShoppingListService, RecipeService]
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   loadedFeature: string = 'recipe';

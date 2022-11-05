@@ -14,15 +14,15 @@ export class DataStorageService {
   ) {}
 
   public storeRecipes(): void {
-    const recipes: Recipe[] = this.recipeService.getRecipes();
-    this.httpService
-      .put(
-        `https://shopping-metro-default-rtdb.europe-west1.firebasedatabase.app/recipes.json`,
-        recipes
-      )
-      .subscribe((res) => {
-        console.log(res);
-      });
+    // const recipes: Recipe[] = this.recipeService.getRecipes();
+    // this.httpService
+    //   .put(
+    //     `https://shopping-metro-default-rtdb.europe-west1.firebasedatabase.app/recipes.json`,
+    //     recipes
+    //   )
+    //   .subscribe((res) => {
+    //     console.log(res);
+    //   });
   }
 
   public fetchRecipes(): void {

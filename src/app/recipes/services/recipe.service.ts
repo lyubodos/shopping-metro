@@ -14,7 +14,7 @@ export class RecipeService {
 
   public setRecipes(recipes: Recipe[]): void {
     this.recipes = recipes;
-    this.recipesChanged.next(this.recipes.slice());
+    this.recipesChanged.next(this.recipes.slice()); 
   }
 
   public getRecipes(): Recipe[] {
@@ -23,6 +23,21 @@ export class RecipeService {
 
   public getRecipe(index: number): Recipe {
     return this.recipes[index];
+  }
+
+  public addRecipe(recipe: Recipe) {
+    this.recipes.push(recipe);
+    this.recipesChanged.next(this.recipes.slice());
+  }
+
+  public updateRecipe(index: number, newRecipe: Recipe) {
+    this.recipes[index] = newRecipe;
+    this.recipesChanged.next(this.recipes.slice());
+  }
+
+  public deleteRecipe(index: number) {
+    this.recipes.splice(index, 1);
+    this.recipesChanged.next(this.recipes.slice());
   }
 
   public addIngrToShoppingList(ingredients: Ingredients[]): void {
