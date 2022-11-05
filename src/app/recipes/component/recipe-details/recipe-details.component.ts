@@ -11,7 +11,7 @@ import { RecipeService } from '../../services/recipe.service';
 export class RecipeDetailsComponent implements OnInit {
   @Input() recipe: Recipe;
 
-  id: number;
+  private id: number;
 
   constructor(
     private recipeService: RecipeService,

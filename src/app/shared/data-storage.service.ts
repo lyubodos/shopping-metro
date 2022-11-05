@@ -36,9 +36,7 @@ export class DataStorageService {
         });
       }))
       .subscribe((recipes: Recipe[]) => {
-        this.recipeService.setRecipes(recipes);
-        console.log(recipes);
-        
+        this.recipeService.setRecipes(recipes);        
       });
   }
 }
