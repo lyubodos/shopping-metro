@@ -1,6 +1,5 @@
 import { Component, OnInit, Output } from "@angular/core";
 import { DataStorageService } from "src/app/shared/data-storage.service";
-import { RecipeService } from "../recipes/services/recipe.service";
 
 @Component({
     selector: "app-header",

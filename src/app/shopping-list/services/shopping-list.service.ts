@@ -1,4 +1,3 @@
-import { EventEmitter, Injectable } from "@angular/core";
 import { Subject } from "rxjs";
 import { Ingredients } from "../data/ingredients.model";
 

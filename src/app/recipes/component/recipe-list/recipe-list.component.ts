@@ -3,7 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { DataStorageService } from 'src/app/shared/data-storage.service';
 import { Recipe } from '../../data/recipe.model';
 import { RecipeService } from '../../services/recipe.service';
-import { Subject } from 'rxjs-compat';
+import { Subject, Subscription } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
 @Component({
