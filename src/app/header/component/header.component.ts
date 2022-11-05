@@ -14,4 +14,8 @@ export class Header {
     public saveRecipes(): void {
         this.dataStorageService.storeRecipes();
     }
+
+    public fetchRecipes() {
+        this.dataStorageService.fetchRecipes();
+    }
 }
