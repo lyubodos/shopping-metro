@@ -1,10 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, NgForm } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { Recipe } from '../../data/recipe.model';
 import { RecipeService } from '../../services/recipe.service';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { Ingredients } from 'src/app/shopping-list/data/ingredients.model';
 
 @Component({
   selector: 'app-recipe-edit',
@@ -12,11 +13,13 @@ import { takeUntil } from 'rxjs/operators';
   styleUrls: ['./recipe-edit.component.css'],
 })
 export class RecipeEditComponent implements OnInit, OnDestroy {
+
   private unsubscribe$ = new Subject<void>();
 
   public editMode: boolean = false;
   public id: number;
   public recipe: Recipe;
+  public formRercipe: FormGroup;
 
   constructor(
     private route: ActivatedRoute,
@@ -27,6 +30,7 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
     this.route.params.subscribe((params) => {
       this.id = +params['id'];
       this.editMode = params['id'] != null;
+      this.initForm();
     });
     
   }
@@ -36,7 +40,31 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
     this.unsubscribe$.complete();
   }
 
-  public onSubmit(form: NgForm) {
-    console.log(form.value);
+  public onSubmit(){
+
+  }
+
+
+  private initForm() {
+    let recipeName: string = '';
+    let imageURL: string = '';
+    let descritpion: string = '';
+    let ingredients: Ingredients[] = [];
+
+
+    if(this.editMode){
+      const recipe: Recipe = this.recipeService.getRecipe(this.id);
+      recipeName = recipe.recipeName;
+      imageURL = recipe.imagePath;
+      descritpion = recipe.description;
+      ingredients = recipe.ingredients;
+    }
+  
+    this.formRercipe = new FormGroup({
+      'name': new FormControl(recipeName),
+      'imagePath': new FormControl(imageURL),
+      'description': new FormControl(descritpion),
+      'ingredients': new FormControl(ingredients)
+    });
   }
 }
