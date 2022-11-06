@@ -1,3 +1,8 @@
 button {
-    margin: 10 px 5px 0 0;
+    margin-right:5px;
+}
+
+input.ng-invalid.ng-touched,
+textarea.ng-invalid.ng-touched {
+    border-color: red;
 }
