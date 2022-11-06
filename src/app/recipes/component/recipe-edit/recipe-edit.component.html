@@ -3,33 +3,54 @@
     <form (ngSubmit)="onSubmit(f)" #f="ngForm">
       <div class="row">
         <div class="col-xs-12">
-          <label for="recipeName">Recipe name:</label>
-          <input class="form-control" type="text" id="recipeName" name="recpeName" ngModel/>
+          <div class="form-group">
+            <label for="recipeName">Recipe name:</label>
+            <input
+              class="form-control"
+              type="text"
+              id="recipeName"
+              name="recpeName"
+              ngModel
+            />
+          </div>
         </div>
       </div>
       <div class="row">
         <div class="col-xs-12">
-          <label for="imageURL">Image URL:</label>
-          <input class="form-control" type="text" id="imageURL" />
+          <div class="form-group">
+            <label for="imageURL">Image URL:</label>
+            <input class="form-control" type="text" id="imageURL" />
+          </div>
         </div>
       </div>
       <div class="row">
         <div class="col-xs-12">
-          <label for="description">Description:</label
-          ><input class="form-control"type="text" id="description" />
+          <img src="" alt="" class="img-responsive" />
         </div>
       </div>
       <div class="row">
-        <div class="col-sm-5 form-group">
-            <label for="name">Name:</label>
-            <input class="form-control" type="text" id="name">
+        <div class="col-xs-12">
+          <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea class="form-control" type="text" id="description" rows="6"></textarea>
+          </div>
         </div>
-        <div class="col-sm-7 form-group">
-            <label for="amount">Amount:</label>
-            <input class="form-control" type="number" id="amount">
-        </div>
+      </div>
+      <div class="row">
+    
+          <div class="col-xs-8">
+            <input class="form-control" type="text" id="name" />
+          </div>
+          <div class="col-xs-2">
+            <input class="form-control" type="number" id="amount" />
+          </div>
+          <div class="col-xs-2">
+            <button class="btn btn-danger">X</button>
+          </div>
+
       </div>
       <button class="btn btn-success" type="submit">Edit Recipe</button>
+      <button class="btn btn-danger" type="button">Cancel</button>
     </form>
   </div>
 </div>
