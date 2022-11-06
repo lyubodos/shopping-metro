@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, NgForm } from '@angular/forms';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormArray, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Recipe } from '../../data/recipe.model';
 import { RecipeService } from '../../services/recipe.service';
@@ -26,6 +26,10 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
     private recipeService: RecipeService
   ) {}
 
+  get controls() {
+    return (<FormArray>this.formRercipe.get('ingredients')).controls;
+  }
+
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.id = +params['id'];
@@ -49,7 +53,7 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
     let recipeName: string = '';
     let imageURL: string = '';
     let descritpion: string = '';
-    let ingredients: Ingredients[] = [];
+    let ingredients =  new FormArray([]); 
 
 
     if(this.editMode){
@@ -57,14 +61,24 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
       recipeName = recipe.recipeName;
       imageURL = recipe.imagePath;
       descritpion = recipe.description;
-      ingredients = recipe.ingredients;
+       
+      if(recipe['ingredients']){
+        for (const ingredient of recipe.ingredients) {
+          ingredients.push(
+            new FormGroup({
+              'name': new FormControl(ingredient.name),
+              'amount': new FormControl(ingredient.amount)
+            })
+          )
+        }
+      }
     }
   
     this.formRercipe = new FormGroup({
       'name': new FormControl(recipeName),
       'imagePath': new FormControl(imageURL),
       'description': new FormControl(descritpion),
-      'ingredients': new FormControl(ingredients)
+      'ingredients': ingredients
     });
   }
 }
