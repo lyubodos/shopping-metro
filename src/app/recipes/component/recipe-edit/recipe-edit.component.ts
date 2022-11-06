@@ -48,6 +48,13 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
 
   }
 
+  public addIngredient(){
+    (<FormArray>this.formRercipe.get('ingredients')).push({
+      'name': new FormControl(),
+      'amount': new FormControl()
+    });
+  }
+
 
   private initForm() {
     let recipeName: string = '';
