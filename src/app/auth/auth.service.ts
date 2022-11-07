@@ -6,7 +6,7 @@ import { AuthResponse } from './data/auth-res.data';
   providedIn: 'root',
 })
 export class AuthServiceComponent {
-  private readonly strCtrl = 'AIzaSyALBep5-I2zk3rgeB2lVTR54MkFoZuYBhU';
+  private readonly strCtrl = 'AIzaSyALBep5-I2zk3rgeB2lVTR54MkFoZuYBmD';
 
   constructor(private http: HttpClient) {}
 
