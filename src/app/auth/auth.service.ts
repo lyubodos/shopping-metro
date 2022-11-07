@@ -20,4 +20,13 @@ export class AuthServiceComponent {
       }
     )
   }
+  
+  public login(email: string, password: string){
+    return this.http.post<AuthResponse>(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${this.strCtrl}`,
+    {
+        email,
+        password,
+        returnSecureToken: true,
+    })
+  }
 }

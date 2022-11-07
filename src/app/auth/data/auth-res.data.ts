@@ -4,4 +4,5 @@ export interface AuthResponse {
     email: string;
     refreshToken: string;
     localId: string;
+    registered?: boolean;
 }
