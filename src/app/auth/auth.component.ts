@@ -1,4 +1,5 @@
-import { Component } from "@angular/core";
+import { Component, ViewChild } from "@angular/core";
+import { NgForm } from "@angular/forms";
 
 @Component({
     selector: 'app-auth',
@@ -7,5 +8,16 @@ import { Component } from "@angular/core";
 })
 
 export class AuthComponent {
-        
+ @ViewChild('authForm') authForm: NgForm;
+
+ public isAuthenticated: boolean = false;
+
+ public onSwitchMode(): void {
+    this.isAuthenticated = !this.isAuthenticated;
+    this.authForm.reset();
+ }
+
+ public onSubmit(form: NgForm): void {
+    console.log(form);
+ }
 }
