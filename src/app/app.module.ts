@@ -19,11 +19,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { RecipeStartComponent } from './recipes/component/recipe-start/recipe-start.component';
 import { RecipeEditComponent } from './recipes/component/recipe-edit/recipe-edit.component';
 import { RecipeService } from './recipes/services/recipe.service';
+import { AuthComponent } from './auth/auth.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     Header,
+    AuthComponent,
     ShoppingList,
     RecipeListComponent,
     RecipeComponent,
