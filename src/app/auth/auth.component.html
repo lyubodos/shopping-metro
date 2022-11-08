@@ -1,48 +1,44 @@
 <div class="row">
   <div class="col-xs-12 col-md-5 col-md-offset-3">
-    <div class="alert alert-danger" *ngIf="error">
-        <p>{{error}}</p>
+    <div class="row">
+      <div class="alert alert-danger" *ngIf="error">
+        <p>{{ error }}</p>
+      </div>
     </div>
-    <div *ngIf="isLoading" class="loading-spinner">
-        <app-loading-spinner></app-loading-spinner>
-    </div>
-    <form (ngSubmit)="onSubmit(authForm)" #authForm="ngForm" *ngIf="!isLoading">
-      <div class="form-group">
-        <label for="email">E-mail:</label>
-        <input
-          type="email"
-          id="email"
-          class="form-control"
-          ngModel
-          name="email"
-          required
-          email
-        />
+
+    <form [formGroup]="authForm" (ngSubmit)="onSubmit(authForm)">
+      <div class="row">
+        <div class="form-group">
+          <label for="">Email: </label>
+          <input
+            type="email"
+            class="form-control"
+            id="email"
+            formControlName="email"
+          />
+        </div>
       </div>
-      <div class="form-group">
-        <label for="">Password:</label>
-        <input
-          type="password"
-          class="form-control"
-          id="password"
-          ngModel
-          name="password"
-          required
-          minlength="6"
-        />
-      </div>
-      <div>
-        <button class="btn btn-primary" [disabled]="!authForm.valid">
-          {{ isAuthenticated ? "Login" : "Sign up" }}
-        </button>
-        <button class="btn btn-danger" style="margin-left: 5px">Cancel</button>
-      </div>
-      <div>
-        <button
-          class="btn btn-primary"
-          (click)="onSwitchMode()"
-          style="margin-top: 10px"
-        >
+      <div class="row">
+        <div class="form-group">
+          <label for="password">Password: </label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            formControlName="password"
+          />
+        </div>
+        <div class="btn-wrapper">
+          <button
+            class="btn btn-success"
+            type="submit"
+            [disabled]="!authForm.valid"
+          >
+            {{ isAuthenticated ? "Login" : "Sign up" }}
+          </button>
+          <button class="btn btn-danger" type="button">Cancel</button>
+        </div>
+        <button class="btn btn-primary" type="button" (click)="onSwitchMode()">
           Switch to {{ isAuthenticated ? "Sign up" : "Login" }}
         </button>
       </div>
