@@ -28,8 +28,7 @@ export class AuthComponent implements OnInit {
       .subscribe(resData => {
         console.log(resData);
       }, error => {
-        this.error = error.error.error.message;
-        console.log(error);
+       this.error = error;
       })
     } else {
       this.authService.signUp(email, password)
@@ -37,8 +36,7 @@ export class AuthComponent implements OnInit {
         console.log(resData);
         
       }, error => {
-        this.error = error.error.error.message;
-        console.log(error);
+        this.error = error;
       });
     }
     console.log(this.authForm.value);
