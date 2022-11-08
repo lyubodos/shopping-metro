@@ -19,12 +19,20 @@ export class AuthComponent implements OnInit {
     this.initAuthForm();
   }
 
-  public onSubmit(form) {
+  public onSubmit(form: FormGroup): void {
+    const email = this.authForm.value.email;
+    const password = this.authForm.value.password;
 
     if(this.isAuthenticated){
-     
+      this.authService.login(email, password)
+      .subscribe(resData => {
+        console.log(resData);
+      }, error => {
+        this.error = error.error.error.message;
+        console.log(error);
+      })
     } else {
-      this.authService.signUp(this.authForm.value.email, this.authForm.value.password)
+      this.authService.signUp(email, password)
       .subscribe((resData) => {
         console.log(resData);
         
@@ -40,6 +48,7 @@ export class AuthComponent implements OnInit {
 
   public onSwitchMode(): void {
     this.isAuthenticated = !this.isAuthenticated;
+    this.error = null;
   }
 
   private initAuthForm(): void {

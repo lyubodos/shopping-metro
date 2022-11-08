@@ -6,7 +6,7 @@ import { AuthResponse } from '../data/auth-res.data';
   providedIn: 'root',
 })
 export class AuthServiceComponent {
-  private readonly strCtrl = 'AIzaSyALBep5-I2zk3rgeB2lVTR54MkFoZuYBh';
+  private readonly strCtrl = 'AIzaSyALBep5-I2zk3rgeB2lVTR54MkFoZuYBhU';
 
   constructor(private http: HttpClient) {}
 
@@ -38,4 +38,13 @@ export class AuthServiceComponent {
         refreshToken: true
       });
   }
+  
+  public login(email: string, password: string) {
+      return this.http.post<AuthResponse>(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${this.strCtrl}`,{
+        email,
+        password,
+        refreshToken: true
+      })
+  }
+
 }
