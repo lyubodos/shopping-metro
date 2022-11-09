@@ -1,5 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Observable, Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
+import { AuthResponse } from './data/auth-res.data';
 import { AuthServiceComponent } from './services/auth.service';
 
 @Component({
@@ -8,39 +12,47 @@ import { AuthServiceComponent } from './services/auth.service';
   styleUrls: ['./auth.component.css'],
 })
 export class AuthComponent implements OnInit {
+  public unsubscribe$ = new Subject<void>();
+
   public authForm: FormGroup;
   public isAuthenticated: boolean = false;
-
   public error: string = null;
+  public isLoading: boolean = false;
 
-  constructor(private authService: AuthServiceComponent) {}
+  constructor(
+    private authService: AuthServiceComponent,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.initAuthForm();
   }
 
   public onSubmit(form: FormGroup): void {
+    this.isLoading = true;
+    let authObservable: Observable<AuthResponse>;
+
     const email = this.authForm.value.email;
     const password = this.authForm.value.password;
 
-    if(this.isAuthenticated){
-      this.authService.login(email, password)
-      .subscribe(resData => {
-        console.log(resData);
-      }, error => {
-       this.error = error;
-      })
+    if (this.isAuthenticated) {
+      authObservable = this.authService.login(email, password);
     } else {
-      this.authService.signUp(email, password)
-      .subscribe((resData) => {
-        console.log(resData);
-        
-      }, error => {
-        this.error = error;
-      });
+      authObservable = this.authService.signUp(email, password);
     }
-    console.log(this.authForm.value);
-    
+
+    authObservable.subscribe(
+      (resData) => {
+        console.log(resData);
+        this.router.navigate['/recipes'];
+        this.isLoading = false;
+      },
+      (error) => {
+        this.error = error;
+        this.isLoading = false;
+      }
+    );
+
     form.reset();
   }
 

@@ -53,8 +53,7 @@ export class AuthServiceComponent {
           this.handleAuth(
             resData.email,
             resData.localId,
-            resData.idToken,
-            +resData.expiresIn
+            resData.idToken
           );
         })
       );
@@ -64,9 +63,9 @@ export class AuthServiceComponent {
     email: string,
     userId: string,
     token: string,
-    expiresIn: number
+    expiresIn?: number
   ) {
-    const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
+    const expirationDate = new Date(new Date().getTime() + (expiresIn * 0.001));
 
     const user = new User(email, userId, token, expirationDate);
     this.user.next(user);

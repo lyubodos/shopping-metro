@@ -20,9 +20,12 @@
             <li><a (click)="fetchRecipes()">Fetch Data</a></li>
           </ul>
         </li>
-          <li routerLinkActive="active">
-            <a routerLink="/signup">Sign up/Login</a>
-          </li>
+        <li routerLinkActive="active" *ngIf="!isAuthenticated">
+          <a routerLink="/signup">Sign up/Login</a>
+        </li>
+        <li *ngIf="isAuthenticated">
+          <a href="">Logout</a>
+        </li>
       </ul>
     </div>
   </div>
