@@ -10,7 +10,7 @@ import { DataStorageService } from 'src/app/shared/data-storage.service';
   styleUrls: ['header.component.css'],
 })
 export class Header implements OnInit, OnDestroy {
-  private unsubscribe$: Subject<void>;
+  public subs: Subscription;
   public isAuthenticated: boolean = false;
 
   constructor(
@@ -19,16 +19,14 @@ export class Header implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.authService.user
-    .pipe(takeUntil(this.unsubscribe$))
+    this.subs = this.authService.user
     .subscribe(user => {
         this.isAuthenticated = !!user;
     });
   }
 
   ngOnDestroy(): void {
-    this.unsubscribe$.next();
-    this.unsubscribe$.complete();
+   this.subs.unsubscribe();
   }
 
   public saveRecipes(): void {

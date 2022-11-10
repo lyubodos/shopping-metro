@@ -12,7 +12,6 @@ import { AuthServiceComponent } from './services/auth.service';
   styleUrls: ['./auth.component.css'],
 })
 export class AuthComponent implements OnInit {
-  public unsubscribe$ = new Subject<void>();
 
   public authForm: FormGroup;
   public isAuthenticated: boolean = false;
