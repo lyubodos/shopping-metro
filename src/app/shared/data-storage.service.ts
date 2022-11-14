@@ -3,6 +3,8 @@ import { Injectable } from '@angular/core';
 import { Recipe } from '../recipes/data/recipe.model';
 import { RecipeService } from '../recipes/services/recipe.service';
 import { map } from 'rxjs/operators';
+import { AuthServiceComponent } from '../auth/services/auth.service';
+import { tap, take, exhaustMap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -10,7 +12,8 @@ import { map } from 'rxjs/operators';
 export class DataStorageService {
   constructor(
     private httpService: HttpClient,
-    private recipeService: RecipeService
+    private recipeService: RecipeService,
+    private authService: AuthServiceComponent
   ) {}
 
   public storeRecipes(): void {
@@ -25,18 +28,24 @@ export class DataStorageService {
     //   });
   }
 
-  public fetchRecipes(): void {
-    this.httpService
-      .get<Recipe[]>(
-        `https://shopping-metro-default-rtdb.europe-west1.firebasedatabase.app/recipes.json`
-      )
-      .pipe(map(recipes => {
+  public fetchRecipes() {
+    return this.authService.user
+    .pipe(
+      take(1),
+      exhaustMap(user => {
+        return  this.httpService
+        .get<Recipe[]>(
+          `https://shopping-metro-default-rtdb.europe-west1.firebasedatabase.app/recipes.json`
+        )
+      }),
+      map(recipes => {
         return recipes.map(recipe => {
             return {...recipe, ingredients: recipe.ingredients ?? []}
         });
-      }))
-      .subscribe((recipes: Recipe[]) => {
-        this.recipeService.setRecipes(recipes);        
-      });
+      }),
+      tap(recipes => {
+        this.recipeService.setRecipes(recipes);
+      })
+      )
   }
 }

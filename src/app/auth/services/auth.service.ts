@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AuthResponse } from '../data/auth-res.data';
 import { catchError, tap } from 'rxjs/operators';
-import { Subject, throwError } from 'rxjs';
+import { BehaviorSubject, throwError } from 'rxjs';
 import { User } from '../data/user.data';
 
 @Injectable({
@@ -10,7 +10,8 @@ import { User } from '../data/user.data';
 })
 export class AuthServiceComponent {
   private readonly strCtrl = 'AIzaSyALBep5-I2zk3rgeB2lVTR54MkFoZuYBhU';
-  public user = new Subject<User>();
+  public user = new BehaviorSubject<User>(null);
+  
 
   constructor(private http: HttpClient) {}
 
