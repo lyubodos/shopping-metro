@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 import { AuthResponse } from './data/auth-res.data';
 import { AuthServiceComponent } from './services/auth.service';
 
@@ -43,7 +42,7 @@ export class AuthComponent implements OnInit {
     authObservable.subscribe(
       (resData) => {
         console.log(resData);
-        this.router.navigate['/recipes'];
+        this.router.navigate(['/recipes']);
         this.isLoading = false;
       },
       (error) => {

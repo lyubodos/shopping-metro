@@ -24,9 +24,11 @@
           <a routerLink="/signup">Sign up/Login</a>
         </li>
         <li *ngIf="isAuthenticated">
-          <a href="">Logout</a>
+          <a (click)="onLogout()" style="cursor: pointer;">Logout</a>
         </li>
       </ul>
     </div>
   </div>
 </nav>
+<app-loading-spinner *ngIf="isLoading"></app-loading-spinner>
+

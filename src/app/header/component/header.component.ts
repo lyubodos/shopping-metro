@@ -12,6 +12,7 @@ import { DataStorageService } from 'src/app/shared/data-storage.service';
 export class Header implements OnInit, OnDestroy {
   public subs: Subscription;
   public isAuthenticated: boolean = false;
+  public isLoading: boolean = false;
 
   constructor(
     private dataStorageService: DataStorageService,
@@ -35,5 +36,9 @@ export class Header implements OnInit, OnDestroy {
 
   public fetchRecipes() {
     this.dataStorageService.fetchRecipes();
+  }
+
+  public onLogout(){
+    this.isAuthenticated = false;
   }
 }

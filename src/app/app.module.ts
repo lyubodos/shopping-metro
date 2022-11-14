@@ -43,8 +43,8 @@ import { LoadinSpinnerComponent } from './shared/loading-spinner/loading-spinner
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    AppRoutingModule,
     HttpClientModule,
+    AppRoutingModule,
   ],
   providers: [ShoppingListService, RecipeService],
   bootstrap: [AppComponent]
