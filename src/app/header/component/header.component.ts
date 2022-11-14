@@ -10,7 +10,8 @@ import { DataStorageService } from 'src/app/shared/data-storage.service';
   styleUrls: ['header.component.css'],
 })
 export class Header implements OnInit, OnDestroy {
-  public subs: Subscription;
+
+  private userSub: Subscription;
   public isAuthenticated: boolean = false;
   public isLoading: boolean = false;
 
@@ -20,14 +21,14 @@ export class Header implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.subs = this.authService.user
-    .subscribe(user => {
+    this.userSub = this.authService.user
+    .subscribe(user => {      
         this.isAuthenticated = !!user;
     });
   }
 
   ngOnDestroy(): void {
-   this.subs.unsubscribe();
+   this.userSub.unsubscribe();
   }
 
   public saveRecipes(): void {
@@ -35,10 +36,12 @@ export class Header implements OnInit, OnDestroy {
   }
 
   public fetchRecipes() {
-    this.dataStorageService.fetchRecipes();
+    this.dataStorageService.fetchRecipes().subscribe(resData => console.log(resData)
+    )
   }
 
   public onLogout(){
     this.isAuthenticated = false;
+    this.authService.user.next(null);
   }
 }

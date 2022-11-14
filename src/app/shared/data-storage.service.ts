@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Recipe } from '../recipes/data/recipe.model';
 import { RecipeService } from '../recipes/services/recipe.service';
@@ -29,23 +29,23 @@ export class DataStorageService {
   }
 
   public fetchRecipes() {
-    return this.authService.user
-    .pipe(
+    return this.authService.user.pipe(
       take(1),
-      exhaustMap(user => {
-        return  this.httpService
-        .get<Recipe[]>(
-          `https://shopping-metro-default-rtdb.europe-west1.firebasedatabase.app/recipes.json`
-        )
+      exhaustMap((user) => {
+        console.log(user.token);
+        
+        return this.httpService.get<Recipe[]>(
+          `https://shopping-metro-default-rtdb.europe-west1.firebasedatabase.app/recipes.json?auth=${user.token}`
+        );
       }),
-      map(recipes => {
-        return recipes.map(recipe => {
-            return {...recipe, ingredients: recipe.ingredients ?? []}
+      map((recipes) => {
+        return recipes.map((recipe) => {
+          return { ...recipe, ingredients: recipe.ingredients ?? [] };
         });
       }),
-      tap(recipes => {
+      tap((recipes) => {
         this.recipeService.setRecipes(recipes);
       })
-      )
+    );
   }
 }
