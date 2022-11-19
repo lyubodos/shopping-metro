@@ -21,6 +21,9 @@ import { RecipeEditComponent } from './recipes/component/recipe-edit/recipe-edit
 import { RecipeService } from './recipes/services/recipe.service';
 import { AuthComponent } from './auth/auth.component';
 import { LoadinSpinnerComponent } from './shared/loading-spinner/loading-spinner.component';
+import { StoreModule } from '@ngrx/store';
+import { counterReducer } from './shared/store/reducers/counter.reducers';
+import { MyCounterComponent } from './counter/my-counter/my-counter.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +40,7 @@ import { LoadinSpinnerComponent } from './shared/loading-spinner/loading-spinner
     RecipeStartComponent,
     RecipeEditComponent,
     LoadinSpinnerComponent,
-
+    MyCounterComponent,
   ],
   imports: [
     BrowserModule,
@@ -45,8 +48,9 @@ import { LoadinSpinnerComponent } from './shared/loading-spinner/loading-spinner
     ReactiveFormsModule,
     HttpClientModule,
     AppRoutingModule,
+    StoreModule.forRoot({ count: counterReducer }),
   ],
   providers: [ShoppingListService, RecipeService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

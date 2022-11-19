@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AuthComponent } from './auth/auth.component';
+import { MyCounterComponent } from './counter/my-counter/my-counter.component';
 import { RecipeDetailsComponent } from './recipes/component/recipe-details/recipe-details.component';
 import { RecipeEditComponent } from './recipes/component/recipe-edit/recipe-edit.component';
 import { RecipeItemComponent } from './recipes/component/recipe-item/recipe-item.component';
@@ -22,6 +23,7 @@ const appRoutes: Routes = [
     ],
   },
   { path: 'shopping-list', component: ShoppingList },
+  { path: 'counter', component: MyCounterComponent },
   { path: 'recipes/:recipe', component: RecipeItemComponent },
   { path: 'signup', component: AuthComponent}
 ];
