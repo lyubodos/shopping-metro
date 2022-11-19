@@ -7,7 +7,7 @@
       <hr>
       <button class="btn btn-success btn-parser" (click)="onIncrement()">Increment</button>
       <button class="btn btn-danger  btn-parser" (click)="onDecrement()">Decrement</button>
-      <button class="btn btn-primary btn-parser" (click)="onClear()">Clear</button>
+      <button class="btn btn-primary btn-parser" (click)="onClear()" [disabled]="isClearDisabled">Clear</button>
     </form>
   </div>
 </div>

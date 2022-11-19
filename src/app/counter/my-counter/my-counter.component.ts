@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { decrement, increment, clear } from 'src/app/shared/store/actions/counter.actions';
@@ -9,8 +9,9 @@ import { decrement, increment, clear } from 'src/app/shared/store/actions/counte
   styleUrls: ['./my-counter.component.css']
 })
 export class MyCounterComponent implements OnInit {
-  initialState: number;
-  count$: Observable<number>;
+  public count$: Observable<number>;
+
+  public isClearDisabled: boolean = false;
 
   constructor(private store: Store) { 
 
@@ -19,7 +20,15 @@ export class MyCounterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.count$.subscribe(val => {
+      if(val <= 0){
+        this.isClearDisabled = true;
+      } else {
+        this.isClearDisabled = false;
+      }
+    })
   }
+
 
   public onIncrement(){
     this.store.dispatch(increment());
